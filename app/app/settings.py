@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "rest_framework",
-    "giveaway",
+    "faucet",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -146,16 +146,14 @@ LOGGING = {
 }
 
 # Load env vars
-if not os.path.exists(os.getenv("ENV_LOCATION", ".env")):
-    raise FileNotFoundError("Couldn't find env file location under env ENV_LOCATION / .env path")
-
-load_dotenv(dotenv_path=os.getenv("ENV_LOCATION", ".env"), verbose=True)
+if os.path.exists(os.getenv("ENV_LOCATION", ".env")):
+    load_dotenv(dotenv_path=os.getenv("ENV_LOCATION", ".env"), verbose=True)
 
 MONGO_URI: str = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 FUNDING_COOLDOWN: int = int(os.getenv("FUNDING_COOLDOWN", 60))
 WALLET_PK: str = os.getenv("WALLET_PK")
 WALLET_ADDRESS: str = os.getenv("WALLET_ADDRESS")
-INFURA_PROJECT_ID: str = os.getenv("INFURA_PROJECT_ID")
+RPC_URL: str = os.getenv("RPC_URL")
 
 DB_NAME: str = "giveaway_db"
 GIVEAWAY_VALUE: float = 0.0001

@@ -2,7 +2,7 @@ import datetime
 from typing import List, Optional
 
 import pymongo
-from odmantic.query import and_, desc
+from odmantic.query import and_, desc, or_
 from pymongo.errors import PyMongoError
 
 from ..models.transaction import Transaction, TransactionStatus
@@ -43,9 +43,12 @@ class TransactionRepository:
             status=status
         )
 
-    def get_last_tx(self, wallet_address: str) -> Optional[Transaction]:
+    def get_last_tx(self, wallet_address: str, ip_address: str) -> Optional[Transaction]:
         query = and_(
-            Transaction.wallet_address == wallet_address,
+            or_(
+                Transaction.wallet_address == wallet_address,
+                Transaction.ip_address == ip_address
+            ),
             Transaction.status == TransactionStatus.SUCCESS
         )
         try:

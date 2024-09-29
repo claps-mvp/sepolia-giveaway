@@ -4,26 +4,32 @@ services:
   web:
     build: .
     command: gunicorn app.wsgi:application --bind 0.0.0.0:8000
-    volumes:
-      - .:/app
     ports:
       - "8000:8000"
     env_file:
       - .env
     environment:
       - MONGO_URI=mongodb://mongo:27017/giveaway_db
+      - PYTHONPATH=/app/app
     depends_on:
       - mongo
+    networks:
+    - sepolia-giveout
 
   mongo:
     image: mongo:latest
     container_name: mongo_container
-    ports:
-      - "27017:27017"
+    expose:
+      - "27017"
     volumes:
       - mongo-data:/data/db
     environment:
       MONGO_INITDB_DATABASE: giveaway_db
+    networks:
+    - sepolia-giveout
 
 volumes:
   mongo-data:
+
+networks:
+  sepolia-giveout:

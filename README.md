@@ -1,12 +1,12 @@
-# Sepolia Giveaway Application
+# Sepolia Faucet Application
 
 ## Overview
-This application provides a Sepolia Ethereum giveaway service.
+This application provides a Sepolia Ethereum faucet service.
 
 ## Endpoints
 
-- `POST /giveaway/fund/`: Request funds to a specified wallet address.
-- `GET /giveaway/stats/`: Get statistics on transactions.
+- `POST /faucet/fund/`: Request funds to a specified wallet address.
+- `GET /faucet/stats/`: Get statistics on transactions.
 
 ## Docker
 

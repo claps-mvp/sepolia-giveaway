@@ -8,8 +8,6 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY .env /app/
-
-COPY . /app/
+COPY app/ /app/
 
 CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "app.wsgi:application"]
